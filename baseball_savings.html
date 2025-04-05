@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>野球プレー貯金計算</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 500px;
+      margin: auto;
+      padding: 1em;
+    }
+    input[type="number"] {
+      width: 60px;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    #result {
+      font-size: 1.5em;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>野球プレー貯金計算</h1>
+  
+  <div class="row"><label>出場</label><input type="number" id="appear" value="0"></div>
+  <div class="row"><label>一塁打</label><input type="number" id="single" value="0"></div>
+  <div class="row"><label>二塁打</label><input type="number" id="double" value="0"></div>
+  <div class="row"><label>三塁打</label><input type="number" id="triple" value="0"></div>
+  <div class="row"><label>ソロHR</label><input type="number" id="solo_hr" value="0"></div>
+  <div class="row"><label>ツーランHR</label><input type="number" id="two_hr" value="0"></div>
+  <div class="row"><label>スリーランHR</label><input type="number" id="three_hr" value="0"></div>
+  <div class="row"><label>満塁HR</label><input type="number" id="full_hr" value="0"></div>
+  <div class="row"><label>四死球</label><input type="number" id="walk" value="0"></div>
+  <div class="row"><label>犠打</label><input type="number" id="sacrifice" value="0"></div>
+  <div class="row"><label>盗塁</label><input type="number" id="steal" value="0"></div>
+  <div class="row"><label>打点</label><input type="number" id="rbi" value="0"></div>
+  <div class="row"><label>サヨナラ</label><input type="number" id="sayonara" value="0"></div>
+  <div class="row"><label>サヨナラHR</label><input type="number" id="sayohomerun" value="0"></div>
+
+  <button onclick="calculate()">計算する</button>
+
+  <div id="result">合計: ¥0</div>
+
+  <script>
+    const prices = {
+      appear: 100,
+      single: 200,
+      double: 300,
+      triple: 500,
+      solo_hr: 1000,
+      two_hr: 2000,
+      three_hr: 3000,
+      full_hr: 5000,
+      walk: 100,
+      sacrifice: 100,
+      steal: 200,
+      rbi: 500,
+      sayonara: 5000,
+      sayohomerun: 10000
+    };
+
+    function calculate() {
+      let total = 0;
+      for (let key in prices) {
+        const count = parseInt(document.getElementById(key).value) || 0;
+        total += count * prices[key];
+      }
+      document.getElementById("result").textContent = `合計: ¥${total.toLocaleString()}`;
+    }
+  </script>
+</body>
+</html>
